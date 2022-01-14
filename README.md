@@ -1,2 +1,0 @@
-# SecGen
-Password Generator
