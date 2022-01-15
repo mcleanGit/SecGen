@@ -1,16 +1,17 @@
 // Assignment Code -- develop from starter code
-// character sets, as split arrays, from which password is developed
-const alphaLc = "abcdefghijklmnopqrstuvwxyz".split("");
-const alphaUc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-const numbers = "0123456789".split("");
-const special = "!@#$%^&*()_-+=`~<>?".split("");
+// character sets, as split arrays, from which password is developed, const or var ?
+var alphaLc = "abcdefghijklmnopqrstuvwxyz".split("");
+var alphaUc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+var numbers = "0123456789".split("");
+var special = "!@#$%^&*()_-+=`~<>?".split("");
 // special characters is subset of possible OWASP chars due to some reserved or confusing choices; e.g., space
 
 // identify generate button in card-footer
 var generateBtn = document.querySelector("#generate");
 
 
-// develop criteria for password _inside_ generatePassword function (?)
+// develop criteria for password _inside_ generatePassword function (?) 
+// uses function expression vs function declaration format here
 // These are now working!! May be a problem at end when Button needs to be used again?
 var generatePassword = function() {
 
@@ -30,26 +31,26 @@ var generatePassword = function() {
     if (passwordLength>=8 && passwordLength<=128 === true) {
       this.passwordLength = placeholder;
     }
+// if a proper value is entered
+// replaces Your Secure Password here with 'undefined' after last prompt.
     else {
     alert("You must choose a Password length between 8 and 128. Please try again.");
-  // repeats previous request 
+// repeats previous request 
+
     var passwordLength = prompt("Please choose a password length. Type a number between 8 and 128.");
     }
-
+// the next bracket closes the function. would be placed later in final code
   }
-/*
 
-// all working up to here !!
-// if no choices are made by the user, restart SecGen program -- not working ?
+/* if no choices are made by the user, restart SecGen program -- not working ?
     var noChoices = function () {
     if (alphaLc && alphaUc && numbers && special === !true) {
     alert("You must choose at least one of the four character sets and a proper Password length. Please try again.");
    }
   }
 
-
 // next does not appear to be working, although seemed to be working for length ?
-// takes user input and stores placeholder choices of array content to password generator ? yes?
+// takes user input and stores 'placeholder' choices of array content to password generator ? yes?
     if (alphaLc === true) {
       this.alphaLc = placeholder;
     }
