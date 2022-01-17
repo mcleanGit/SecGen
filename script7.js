@@ -1,163 +1,132 @@
-// Assignment Code -- develop from starter code
-// character sets, as split arrays, from which password is developed, const or var ?
-var alphaLc = "abcdefghijklmnopqrstuvwxyz".split("");
-var alphaUc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-var numbers = "0123456789".split("");
-var special = "!@#$%^&*()_-+=`~<>?".split("");
+// Assignment Code -- develop from starter code  SecGen Password Generator
+// character sets, as split arrays, from which password is developed, const or var ? confirmed in console.log !
+const alphaLc = "abcdefghijklmnopqrstuvwxyz".split("");
+const alphaUc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const numbers = "0123456789".split("");
+const specialChar = "!@#$%^&*()_-+=`~<>?".split("");
 // special characters is subset of possible OWASP chars due to some reserved or confusing choices; e.g., space
-
-// identify generate button in card-footer
+// Assignment code
 var generateBtn = document.querySelector("#generate");
 
+generateBtn.addEventListener("click", generatePassword);
+// begin generating password here
+// currently goes through prompts and then write 'undefined' to textarea
+function generatePassword() {
+  alert("Welcome to the SecGen random Password Generator. Please click OK to begin selecting password criteria.");
 
-// develop criteria for password _inside_ generatePassword function (?) 
-// uses function expression vs function declaration format here
-// These are now working!! May be a problem at end when Button needs to be used again?
-var generatePassword = function() {
+//passwordCriteria object inside generatePassword function
+  var passwordCriteria = {
+    "length":0,
+    "alphaLc":null,
+    "alphaUc":null,
+    "numbers":null,
+    "specialChar":null,
+  }
 
-  var startSecGen = alert("Welcome to the SecGen Password Generator. Please click OK to begin selecting your Password criteria. Note: you must choose a valid Password length and OK at least one of the character-set choices.");
+  // password length input
+  while (!(passwordCriteria.length>=8 && passwordCriteria.length<=128)) {
+    passwordCriteria.length=prompt("Please choose a password length. Type a number between 8 and 128.");
+    if (!(passwordCriteria.length>=8 && passwordCriteria.length<=128)) {
+      alert("The password length must be between 8 and 128 characters. Please enter a valid number.");
+      }
+    };
+
+  var passwordAssembly= []
 
   var alphaLc = prompt("Please indicate if you wish to include lower-case letters, abc, in your password.");
+    if (passwordCriteria.alphaLc==true) {
+      passwordAssembly=passwordAssembly.concat(alphaLc);
+    }
+    else {alphaLc==null}
 
   var alphaUc = prompt("Please indicate if you wish to include upper-case letters, ABC, in your password.");
-    
-  var numbers = prompt("Please indicate if you wish to include numbers, 0-9, in your password.");
+    if (passwordCriteria.alphaUc==true) {
+      passwordAssembly=passwordAssembly.concat(alphaUc);
+    } 
+    else {alphaLc==null}
 
-  var special = prompt("Please indicate if you wish to include special characters, !@#$etc, in your password.");
-  
-  // password length criterion with re-prompt if out of range
-   var passwordLength = prompt("Please choose a password length. Type a number between 8 and 128.");
-
-    if (passwordLength>=8 && passwordLength<=128 === true) {
-      this.passwordLength = placeholder;
+  var numbers = prompt("Please indicate if you wish to inlcude numbers, 0 through 9, in your password.");
+    if (passwordCriteria.numbers==true) {
+      passwordAssembly=passwordAssembly.concat(numbers);
     }
-// if a proper value is entered
-// replaces Your Secure Password here with 'undefined' after last prompt.
-    else {
-    alert("You must choose a Password length between 8 and 128. Please try again.");
-// repeats previous request 
+    else {numbers==null}
 
-    var passwordLength = prompt("Please choose a password length. Type a number between 8 and 128.");
+  var specialChar = prompt("Please indicate if you wish to include special characters,!@#$etc, in your password.");
+    if (passwordCriteria.specialChar==true) {
+      passwordAssembly=passwordAssembly.concat(specialChar);
     }
-// the next bracket closes the function. would be placed later in final code
-  }
+    else {alphaSpecialChar==null}
 
-/* if no choices are made by the user, restart SecGen program -- not working ?
-    var noChoices = function () {
-    if (alphaLc && alphaUc && numbers && special === !true) {
-    alert("You must choose at least one of the four character sets and a proper Password length. Please try again.");
-   }
-  }
+  };
 
-// next does not appear to be working, although seemed to be working for length ?
-// takes user input and stores 'placeholder' choices of array content to password generator ? yes?
-    if (alphaLc === true) {
-      this.alphaLc = placeholder;
+// AT THIS POINT THE FUNCTION FALLS APART
+// was expecting my Assembly [] array was holding the selected values ??
+// was also hoping to include null choice case, but interrupts process ?
+/*var passwordAssembly = function() {
+    if (!alphaLc && !alphaUc && !numbers && !specialChar==true) {
+      prompt("You must choose at least one of the four character sets for your password.");
+      return passwordAssembly;passwordAssembly
     }
-    else {
-      alphaLc = "";
-    }
-    
-    if (alphaUc === true) {
-      this.alphaLc = placeholder;
-    }
-    else {
-      alphaLc = "";
-    }
-    
-    if (numbers === true) {
-      this.numbers = placeholder;
-    }
-    else {
-      numbers = null;
-    }
-
-    if (special === true) {
-      this.special = placeholder;
-    }
-    else {
-      special = "";
-    }
-
-    
-
-}
-
-
-// sets password choices within generatePassword function ??
-// not sure about this -- undefined
-/*
-var passwordChoices = {
-    "alphaLc": "",
-    "alphaUc": "",
-    "numbers": null,
-    "special": "",
-  }
-
-// effort to set placeholder or null set values for each character set
-// sets placeholder or null set for alphaLc
-  if (var=alphaLc === true) {
-    this.passwordChoices.alphaLc = placeholder
-  }
-  else {
-  passwordChoices.alphaLc = ""
-  }
-
-// sets placeholder or null set for alphaUc
-  if (passwordChoices.alphaUc === true) {
-  this.passwordChoices.alphaUc = placeholder
-  }
-  else {
-  passwordChoices.alphaUc = ""
-  }
-
-// sets placeholder or null set for numbers
-  if (passwordChoices.numbers === true) {
-    this.passwordChoices.numbers = placeholder}
-  else {
-    passwordChoices.numbers = null
-  }
-
-//sets placeholder or null set for special characters
-  if (passwordChoices.special === true) {
-    this.passwordChoices.special = placeholder}
-  else {
-    passwordChoices.special = ""
-  }
 */
 
-/*
-var password=""
-  for (var i=0; i<passwordLength; i++){
-    password=passwordChoices(
-      Math.floor(Math.random()* characters.length)
-    );
+// real difficulties however emerge here; various attempts at assembly and randomization
+/* assembling function Array from four char arrays, and
+// not quite clear on the randomization process [showing values from StackOverflow discussion here] ??
+  var functionArray = [
+    function getAlphaLc() {
+      return String.fromCharCode(Math.floor(Math.random() * 26 + 97));
+    },
+    function getAlphaUc() {
+    return String.fromCharCode(Math.floor(Math.random() * 26 + 65));
+    },
+    function getNumbers() {
+      return String.fromCharCode(Math.floor(Math.random() * 10 + 48));
+    },
+    function getSpecialChar() {
+      return String.fromCharCode(Math.floor(Math.random() *  19 + 52));
+    }
+  ]
+// these seem redundant to me, since selection was supposed to be accomplished above ??
+/* checks user selections from passwordAssembly including empty minima
+  if (alphaLc === true) {
+    minimumAlphaLc = functionArray[0];
+    minimumCount++;
   }
-
-  return password;
-}
-
-/* function generatePassword = (length, characters) => {
-  let password = "";
-  for (i=0; i <length; i++) {
-    password += characters.charAT(
-      Math.floor(Math.random() * characters.length)
-    );
+  if (alphaUc === true) {
+    minimumAlphaUc = functionArray [1];
+    minimumCount++;
   }
-    return password;
-};
+  if (numbers === true) {
+    minimumNumbers = functionArray [2];
+    minimumCount++;
+  }
+  if (specialChar === true) {
+    minimumSpecialChar = functionArray [3];
+    minimumCount++;
+  }
+// alternative reflexions on the randomization function
+// this one base on the four arrays
+  var randomPasswordGenerated = "";
+// loop
+  for (let i = 0; i(parseInt(passwordLength) - minimumCount); i++) {
+    var randomNumberPicked = Math.floor(Math.random() * 4);
+  }
+// this being my initial idea to pick up from the assembly arrays
+// var passwordAssembly =
+//  [concat(alphaLc + alphaUc + numbers + specialChar)];
+  var password = ""
+  for (var i = 0; i < passwordCriteria.length; i++) {
+    password = passwordAssembly.concat[alphaLc + alphaUc + numbers + specialChar]
+    [Math.floor(Math.random() * passwordAssembly.length)]);
+ };
+ console.log(random)
 
+// Write password to #password input
+    function writePassword () {
+      var password = generatePassword();
+      var passwordText = document.querySelector("password");
+
+      passwordText.value = password;
+    };
 */
-
-// Write password to the #password input location on webpage window
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-  passwordText.value = password;
-}
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
-
-
 
